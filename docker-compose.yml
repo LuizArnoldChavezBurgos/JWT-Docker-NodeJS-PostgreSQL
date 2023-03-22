@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  db_backend:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${PGDATABASE}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${PGPORT}:5432"
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "${SERVER_PORT}:4000"
+    environment:
+      - DATABASE_URL=postgres://app_user:app_password@db_backend:5432/app_db
+
+volumes:
+  pgdata:

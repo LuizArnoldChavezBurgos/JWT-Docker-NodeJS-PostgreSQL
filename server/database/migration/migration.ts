@@ -1,4 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import DatabasePool from "@/infraestructure/database/pg-pool";
+
 import path from 'path';
 import fs from 'fs';
 
@@ -10,3 +14,5 @@ const sql = fs.readFileSync(filePath, 'utf8');
 (async () => {
     await pool.query(sql);
 })();
+
+process.exit(0);

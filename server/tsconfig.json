@@ -116,5 +116,4 @@
     "node_modules",
     "dist"
   ],
-  "include": ["database/**/*", "src/**/*"]
 }

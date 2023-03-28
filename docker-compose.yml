@@ -11,6 +11,8 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "${PGPORT}:5432"
+    networks:
+      - server-network
 
   backend:
     build:
@@ -20,6 +22,12 @@ services:
       - "${SERVER_PORT}:4000"
     environment:
       - DATABASE_URL=postgres://app_user:app_password@db_backend:5432/app_db
+    command: ["bash", "./wait-for-it.sh", "db_backend:5432", "--", "npm", "run", "migrate:start"]
+    networks:
+        - server-network
 
 volumes:
   pgdata:
+
+networks:
+  server-network:

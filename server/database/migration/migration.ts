@@ -15,4 +15,6 @@ const sql = fs.readFileSync(filePath, 'utf8');
     await pool.query(sql);
 })();
 
+console.log("data migrate")
+
 process.exit(0);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && ts-node -r tsconfig-paths/register ./dist/index.js",
+    "start": "tsc && ts-node -r tsconfig-paths/register ./dist/src/index.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" -r tsconfig-paths/register ./src/index.ts",
     "migrate": "ts-node -r tsconfig-paths/register ./database/migration/migration.ts",
     "migrate:start": "npm run migrate && npm run start"

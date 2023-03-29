@@ -13,6 +13,11 @@ services:
       - "${PGPORT}:5432"
     networks:
       - server-network
+    healthcheck:
+      test: ["CMD-SHELL", "/app/healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build:
@@ -22,9 +27,13 @@ services:
       - "${SERVER_PORT}:4000"
     environment:
       - DATABASE_URL=postgres://app_user:app_password@db_backend:5432/app_db
-    command: ["bash", "./wait-for-it.sh", "db_backend:5432", "--", "npm", "run", "migrate:start"]
+    depends_on:
+      - db_backend
     networks:
         - server-network
+    volumes: # Añade esta sección
+      - ./server:/app # Monta el directorio 'server' en el contenedor en la ruta '/app'
+      - /app/node_modules # Excluye el directorio 'node_modules'
 
 volumes:
   pgdata:

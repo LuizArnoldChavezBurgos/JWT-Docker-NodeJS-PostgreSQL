@@ -10,7 +10,7 @@ COPY healthcheck.sh ./healthcheck.sh
 
 RUN chmod +x ./healthcheck.sh
 
-RUN npm install
+RUN npm install --ignore-scripts
 RUN npm run build
 
 COPY database ./database

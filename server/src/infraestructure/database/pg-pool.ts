@@ -1,7 +1,6 @@
 import { Pool } from 'pg';
 
 // Singleton Database
-
 class DatabasePool {
   private static instance: Pool;
 

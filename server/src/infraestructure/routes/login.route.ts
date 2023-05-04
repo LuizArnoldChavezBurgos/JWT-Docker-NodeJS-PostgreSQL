@@ -27,7 +27,7 @@ router.post('/login', async (req: Request, res: Response) => {
         return res.status(400).json({ error: 'Email is required' });
     }
     // Validate email regex
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; 
+    const emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/; 
     if (!emailRegex.test(email)) {
         return res.status(400).json({ error: 'Email is not valid' });
     }
